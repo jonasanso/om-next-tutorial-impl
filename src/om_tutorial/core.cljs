@@ -13,6 +13,9 @@
               {:name "Gwen" :points 0}
               {:name "Jeff" :points 0}]})
 
+;; -----------------------------------------------------------------------------
+;; Parsing
+
 (defmulti read om/dispatch)
 
 (defn get-people [state key]
@@ -45,6 +48,8 @@
        [:person/by-name name :points]
        #(let [n (dec %)] (if (neg? n) 0 n))))})
 
+;; -----------------------------------------------------------------------------
+;; Components
 
 (defui Person
   static om/Ident
@@ -105,6 +110,4 @@
      :parser (om/parser {:read read :mutate mutate})}))
 
 (om/add-root! reconciler
-  RootView (gdom/getElement "app"))           
-
-
+  RootView (gdom/getElement "app"))

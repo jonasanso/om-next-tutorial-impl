@@ -6,8 +6,10 @@
 (defui HelloWorld
   Object
   (render [this]
-    (dom/div nil "Hello, world!")))
+    (dom/div nil (get (om/props this) :title))))
 
 (def hello (om/factory HelloWorld))
 
-(js/ReactDOM.render (hello) (gdom/getElement "app"))
+(js/ReactDOM.render
+  (hello {:title "Hello, world!"})
+  (gdom/getElement "app"))
